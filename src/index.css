@@ -1,0 +1,297 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Quiz Platform Design System - Educational & Professional */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap');
+
+@layer base {
+  :root {
+    /* Core Colors - Deep Navy & Warm Tones */
+    --background: 40 33% 98%;
+    --foreground: 215 28% 17%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 215 28% 17%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 215 28% 17%;
+
+    /* Primary - Deep Navy Blue */
+    --primary: 215 50% 23%;
+    --primary-foreground: 40 33% 98%;
+
+    /* Secondary - Soft Slate */
+    --secondary: 215 20% 95%;
+    --secondary-foreground: 215 28% 17%;
+
+    /* Muted - Warm Gray */
+    --muted: 40 20% 94%;
+    --muted-foreground: 215 15% 45%;
+
+    /* Accent - Warm Amber */
+    --accent: 38 92% 50%;
+    --accent-foreground: 215 28% 17%;
+
+    /* Success - Emerald */
+    --success: 152 69% 40%;
+    --success-foreground: 0 0% 100%;
+
+    /* Destructive - Coral Red */
+    --destructive: 0 72% 51%;
+    --destructive-foreground: 0 0% 100%;
+
+    /* Warning - Amber */
+    --warning: 38 92% 50%;
+    --warning-foreground: 215 28% 17%;
+
+    /* Info - Sky Blue */
+    --info: 199 89% 48%;
+    --info-foreground: 0 0% 100%;
+
+    --border: 215 20% 88%;
+    --input: 215 20% 88%;
+    --ring: 215 50% 23%;
+
+    --radius: 0.75rem;
+
+    /* Custom Gradients */
+    --gradient-primary: linear-gradient(135deg, hsl(215 50% 23%) 0%, hsl(215 50% 35%) 100%);
+    --gradient-accent: linear-gradient(135deg, hsl(38 92% 50%) 0%, hsl(28 87% 55%) 100%);
+    --gradient-success: linear-gradient(135deg, hsl(152 69% 40%) 0%, hsl(152 69% 50%) 100%);
+    --gradient-hero: linear-gradient(135deg, hsl(215 50% 18%) 0%, hsl(215 45% 28%) 50%, hsl(200 40% 35%) 100%);
+
+    /* Shadows */
+    --shadow-sm: 0 1px 2px 0 hsl(215 28% 17% / 0.05);
+    --shadow-md: 0 4px 6px -1px hsl(215 28% 17% / 0.1), 0 2px 4px -2px hsl(215 28% 17% / 0.1);
+    --shadow-lg: 0 10px 15px -3px hsl(215 28% 17% / 0.1), 0 4px 6px -4px hsl(215 28% 17% / 0.1);
+    --shadow-xl: 0 20px 25px -5px hsl(215 28% 17% / 0.1), 0 8px 10px -6px hsl(215 28% 17% / 0.1);
+    --shadow-glow: 0 0 20px hsl(38 92% 50% / 0.3);
+
+    /* Sidebar */
+    --sidebar-background: 215 50% 18%;
+    --sidebar-foreground: 40 33% 95%;
+    --sidebar-primary: 38 92% 50%;
+    --sidebar-primary-foreground: 215 28% 17%;
+    --sidebar-accent: 215 45% 25%;
+    --sidebar-accent-foreground: 40 33% 95%;
+    --sidebar-border: 215 40% 25%;
+    --sidebar-ring: 38 92% 50%;
+  }
+
+  .dark {
+    --background: 215 35% 9%;
+    --foreground: 40 33% 95%;
+
+    --card: 215 35% 12%;
+    --card-foreground: 40 33% 95%;
+
+    --popover: 215 35% 12%;
+    --popover-foreground: 40 33% 95%;
+
+    --primary: 38 92% 50%;
+    --primary-foreground: 215 28% 17%;
+
+    --secondary: 215 30% 18%;
+    --secondary-foreground: 40 33% 95%;
+
+    --muted: 215 30% 18%;
+    --muted-foreground: 215 20% 60%;
+
+    --accent: 38 92% 50%;
+    --accent-foreground: 215 28% 17%;
+
+    --success: 152 69% 45%;
+    --success-foreground: 0 0% 100%;
+
+    --destructive: 0 62% 45%;
+    --destructive-foreground: 0 0% 100%;
+
+    --warning: 38 92% 50%;
+    --warning-foreground: 215 28% 17%;
+
+    --info: 199 89% 55%;
+    --info-foreground: 0 0% 100%;
+
+    --border: 215 30% 22%;
+    --input: 215 30% 22%;
+    --ring: 38 92% 50%;
+
+    --sidebar-background: 215 40% 8%;
+    --sidebar-foreground: 40 33% 95%;
+    --sidebar-primary: 38 92% 50%;
+    --sidebar-primary-foreground: 215 28% 17%;
+    --sidebar-accent: 215 35% 15%;
+    --sidebar-accent-foreground: 40 33% 95%;
+    --sidebar-border: 215 30% 18%;
+    --sidebar-ring: 38 92% 50%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground font-sans antialiased;
+    font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-semibold tracking-tight;
+  }
+
+  /* KaTeX Styling */
+  .katex {
+    font-size: 1.1em !important;
+  }
+
+  .katex-display {
+    @apply my-4 overflow-x-auto;
+  }
+
+  /* Custom Scrollbar */
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+
+  ::-webkit-scrollbar-track {
+    @apply bg-muted/50 rounded-full;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    @apply bg-muted-foreground/30 rounded-full hover:bg-muted-foreground/50 transition-colors;
+  }
+}
+
+@layer components {
+  /* Glass Effect */
+  .glass {
+    @apply bg-card/80 backdrop-blur-lg border border-border/50;
+  }
+
+  /* Gradient Text */
+  .gradient-text {
+    @apply bg-clip-text text-transparent;
+    background-image: var(--gradient-primary);
+  }
+
+  .gradient-text-accent {
+    @apply bg-clip-text text-transparent;
+    background-image: var(--gradient-accent);
+  }
+
+  /* Card Hover Effect */
+  .card-hover {
+    @apply transition-all duration-300 hover:shadow-lg hover:-translate-y-1;
+  }
+
+  /* Quiz Option Styles */
+  .quiz-option {
+    @apply relative p-4 rounded-xl border-2 border-border bg-card cursor-pointer 
+           transition-all duration-200 hover:border-primary/50 hover:bg-primary/5;
+  }
+
+  .quiz-option.selected {
+    @apply border-primary bg-primary/10;
+  }
+
+  .quiz-option.correct {
+    @apply border-success bg-success/10;
+  }
+
+  .quiz-option.incorrect {
+    @apply border-destructive bg-destructive/10;
+  }
+
+  /* Timer Styles */
+  .timer-warning {
+    @apply text-warning animate-pulse;
+  }
+
+  .timer-danger {
+    @apply text-destructive animate-pulse;
+  }
+
+  /* Navigation Active State */
+  .nav-active {
+    @apply bg-primary text-primary-foreground;
+  }
+
+  /* Badge Variants */
+  .badge-admin {
+    @apply bg-destructive/10 text-destructive border-destructive/20;
+  }
+
+  .badge-teacher {
+    @apply bg-info/10 text-info border-info/20;
+  }
+
+  .badge-student {
+    @apply bg-success/10 text-success border-success/20;
+  }
+
+  /* Stat Card */
+  .stat-card {
+    @apply p-6 rounded-2xl bg-card border border-border shadow-sm card-hover;
+  }
+
+  /* Hero Section */
+  .hero-gradient {
+    background: var(--gradient-hero);
+  }
+}
+
+@layer utilities {
+  /* Animation Utilities */
+  .animate-fade-in {
+    animation: fadeIn 0.5s ease-out forwards;
+  }
+
+  .animate-slide-up {
+    animation: slideUp 0.5s ease-out forwards;
+  }
+
+  .animate-scale-in {
+    animation: scaleIn 0.3s ease-out forwards;
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+
+  @keyframes slideUp {
+    from { 
+      opacity: 0; 
+      transform: translateY(20px); 
+    }
+    to { 
+      opacity: 1; 
+      transform: translateY(0); 
+    }
+  }
+
+  @keyframes scaleIn {
+    from { 
+      opacity: 0; 
+      transform: scale(0.95); 
+    }
+    to { 
+      opacity: 1; 
+      transform: scale(1); 
+    }
+  }
+
+  /* Glow Effect */
+  .glow {
+    box-shadow: var(--shadow-glow);
+  }
+
+  .glow-on-hover:hover {
+    box-shadow: var(--shadow-glow);
+  }
+}
