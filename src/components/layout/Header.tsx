@@ -11,7 +11,7 @@ import {
 } from '@/components/ui/dropdown-menu';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Badge } from '@/components/ui/badge';
-import { BookOpen, LogOut, Settings, User, LayoutDashboard } from 'lucide-react';
+import { BookOpen, LogOut, Settings, User, LayoutDashboard, FileText } from 'lucide-react';
 
 export const Header = () => {
   const { user, profile, role, signOut } = useAuth();
@@ -103,6 +103,12 @@ export const Header = () => {
                   <LayoutDashboard className="mr-2 h-4 w-4" />
                   Dashboard
                 </DropdownMenuItem>
+                {(role === 'admin' || role === 'teacher') && (
+                  <DropdownMenuItem onClick={() => navigate('/manage-exams')}>
+                    <FileText className="mr-2 h-4 w-4" />
+                    Quản lý đề thi
+                  </DropdownMenuItem>
+                )}
                 <DropdownMenuItem onClick={() => navigate('/profile')}>
                   <User className="mr-2 h-4 w-4" />
                   Hồ sơ

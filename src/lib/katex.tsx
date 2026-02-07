@@ -8,10 +8,49 @@ interface LaTeXProps {
   className?: string;
 }
 
+/**
+ * KaTeX (like TeX) treats `^`/`_` as applying to the *next token*.
+ * Users often type `2^456` expecting `2^{456}`; this helper fixes that.
+ */
+export function normalizeLatexSupSub(input: string): string {
+  let out = '';
+  for (let i = 0; i < input.length; i++) {
+    const ch = input[i];
+
+    if ((ch === '^' || ch === '_') && i + 1 < input.length) {
+      const next = input[i + 1];
+
+      // Already grouped
+      if (next === '{') {
+        out += ch;
+        continue;
+      }
+
+      // Group multi-digit exponents/subscripts: ^123 -> ^{123}, _123 -> _{123}
+      if (next >= '0' && next <= '9') {
+        let j = i + 1;
+        while (j < input.length) {
+          const c = input[j];
+          if (c < '0' || c > '9') break;
+          j++;
+        }
+        const digits = input.slice(i + 1, j);
+        out += `${ch}{${digits}}`;
+        i = j - 1;
+        continue;
+      }
+    }
+
+    out += ch;
+  }
+  return out;
+}
+
 export const LaTeX: React.FC<LaTeXProps> = ({ children, block = false, className = '' }) => {
   const html = React.useMemo(() => {
+    const normalized = normalizeLatexSupSub(children);
     try {
-      return katex.renderToString(children, {
+      return katex.renderToString(normalized, {
         displayMode: block,
         throwOnError: false,
         trust: true,
@@ -19,7 +58,7 @@ export const LaTeX: React.FC<LaTeXProps> = ({ children, block = false, className
       });
     } catch (error) {
       console.error('KaTeX error:', error);
-      return children;
+      return normalized;
     }
   }, [children, block]);
 
