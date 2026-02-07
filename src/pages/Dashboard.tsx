@@ -166,7 +166,7 @@ const Dashboard = () => {
                 className="glow-on-hover"
                 onClick={() =>
                   navigate(
-                    role === 'student' ? '/exams' : role === 'teacher' ? '/create-exam' : '/admin/users'
+                    role === 'student' ? '/exams' : role === 'teacher' ? '/manage-exams' : '/admin/users'
                   )
                 }
               >
