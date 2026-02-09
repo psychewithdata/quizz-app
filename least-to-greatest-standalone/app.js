@@ -25,6 +25,8 @@ const resetBtn = $("resetBtn");
 const nextBtn = $("nextBtn");
 const helpBtn = $("helpBtn");
 
+let builtOnce = false;
+
 const LEVELS = [
   // Level 1: show all numbers (3x3)
   {
@@ -223,6 +225,19 @@ function buildLevel() {
     updateOverlayAndCenters();
     renderLine();
   });
+
+  builtOnce = true;
+}
+
+function closeIntro({ shouldBuild } = { shouldBuild: false }) {
+  introOverlay.classList.add("hidden");
+  document.body.classList.remove("modal-open");
+  if (shouldBuild && !builtOnce) buildLevel();
+}
+
+function openIntro() {
+  introOverlay.classList.remove("hidden");
+  document.body.classList.add("modal-open");
 }
 
 function resetState() {
@@ -481,19 +496,15 @@ nextBtn.addEventListener("click", () => {
 });
 
 startBtn.addEventListener("click", () => {
-  introOverlay.classList.add("hidden");
-  document.body.classList.remove("modal-open");
-  buildLevel();
+  closeIntro({ shouldBuild: true });
 });
 
 helpBtn?.addEventListener("click", () => {
-  introOverlay.classList.remove("hidden");
-  document.body.classList.add("modal-open");
+  openIntro();
 });
 
 closeIntroBtn?.addEventListener("click", () => {
-  introOverlay.classList.add("hidden");
-  document.body.classList.remove("modal-open");
+  closeIntro({ shouldBuild: true });
 });
 
 boardWrap.addEventListener("mousedown", onDown);
