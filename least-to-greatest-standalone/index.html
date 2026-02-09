@@ -14,26 +14,42 @@
       }
     </script>
   </head>
-  <body>
+  <body class="modal-open">
     <div class="app" id="app">
       <div class="intro-overlay" id="introOverlay" role="dialog" aria-modal="true">
-        <div class="intro-card">
-          <div class="intro-head">
-            <div>
-              <div class="intro-title">Complete the least to the greatest</div>
-              <div class="intro-subtitle">Nối đường đi và ghé các số theo thứ tự</div>
+        <div class="pixel-window intro-card">
+          <div class="pixel-titlebar">
+            <div class="pixel-dots" aria-hidden="true">
+              <span></span><span></span><span></span>
             </div>
-            <img class="logo" src="./logo.svg" alt="Logo" draggable="false" />
+            <div class="pixel-title">start game?</div>
+            <button class="pixel-close" id="closeIntroBtn" type="button" aria-label="Close">×</button>
           </div>
-          <ul class="intro-rules">
-            <li>Bắt đầu ở số nhỏ nhất trên bảng.</li>
-            <li>Kéo để đi lên / xuống / trái / phải.</li>
-            <li>Mỗi ô chỉ được ghé đúng 1 lần.</li>
-            <li>Các ô có số phải đi theo thứ tự từ nhỏ → lớn.</li>
-            <li>Hoàn thành khi đi hết tất cả ô.</li>
-          </ul>
-          <div class="intro-footer">Dùng chuột hoặc chạm tay để vẽ “con rắn” nhé.</div>
-          <button class="btn primary" id="startBtn" type="button">Bắt đầu chơi</button>
+
+          <div class="pixel-body">
+            <div class="intro-row">
+              <div class="intro-copy">
+                <div class="intro-title">Complete the least to the greatest</div>
+                <div class="intro-subtitle">Connect the numbers from least to greatest</div>
+              </div>
+              <img class="logo pixel" src="./logo.svg" alt="Logo" draggable="false" />
+            </div>
+
+            <ul class="intro-rules">
+              <li>Start at the smallest number on the board.</li>
+              <li>Drag to move up, down, left or right only.</li>
+              <li>You must visit every square exactly once.</li>
+              <li>Numbered squares must be visited from least to greatest.</li>
+              <li>Finish when you have visited all squares.</li>
+            </ul>
+
+            <div class="intro-footer">Use your mouse or finger to draw the “number snake”.</div>
+
+            <button class="pixel-btn" id="startBtn" type="button">
+              <span class="heart" aria-hidden="true">♥</span>
+              Start game
+            </button>
+          </div>
         </div>
       </div>
 
@@ -43,11 +59,13 @@
           <div class="subtitle" id="goalLabel">Hãy bắt đầu ở số nhỏ nhất</div>
         </div>
         <div class="right">
-          <img class="logo small" src="./logo.svg" alt="Logo" draggable="false" />
+          <button class="icon-btn" id="helpBtn" type="button" aria-label="Help">
+            <img class="logo small" src="./logo.svg" alt="Logo" draggable="false" />
+          </button>
         </div>
       </div>
 
-      <div class="status" id="statusLabel">Chạm vào số nhỏ nhất để bắt đầu.</div>
+      <div class="chat" id="statusLabel">Tap the smallest number to start.</div>
 
       <div class="board-wrap" id="boardWrap">
         <div class="grid" id="grid"></div>

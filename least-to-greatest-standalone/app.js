@@ -13,6 +13,7 @@ const $ = (id) => document.getElementById(id);
 
 const introOverlay = $("introOverlay");
 const startBtn = $("startBtn");
+const closeIntroBtn = $("closeIntroBtn");
 const levelLabel = $("levelLabel");
 const goalLabel = $("goalLabel");
 const statusLabel = $("statusLabel");
@@ -22,6 +23,7 @@ const gridEl = $("grid");
 const overlay = $("overlay");
 const resetBtn = $("resetBtn");
 const nextBtn = $("nextBtn");
+const helpBtn = $("helpBtn");
 
 const LEVELS = [
   // Level 1: show all numbers (3x3)
@@ -172,9 +174,17 @@ function buildLevel() {
   const lv = LEVELS[levelIndex];
   const size = lv.size;
 
+  // compute a nice cell size so the grid is centered and compact
+  const vw = window.innerWidth || 900;
+  const vh = window.innerHeight || 700;
+  const maxBoard = Math.min(vw - 72, vh - 220, 560);
+  const cell = Math.floor(clamp((maxBoard - (size - 1) * 8) / size, 54, 86));
+  document.documentElement.style.setProperty("--cell", `${cell}px`);
+  document.documentElement.style.setProperty("--gap", `${Math.max(6, Math.floor(cell * 0.12))}px`);
+
   // layout grid
-  gridEl.style.gridTemplateColumns = `repeat(${size}, 1fr)`;
-  gridEl.style.gridTemplateRows = `repeat(${size}, 1fr)`;
+  gridEl.style.gridTemplateColumns = `repeat(${size}, var(--cell))`;
+  gridEl.style.gridTemplateRows = `repeat(${size}, var(--cell))`;
 
   // build cells
   gridEl.innerHTML = "";
@@ -203,8 +213,8 @@ function buildLevel() {
   const startVal = lv.cells[startCell].v ?? clueOrder[0];
 
   setText(levelLabel, `Level ${lv.id}/5`);
-  setText(goalLabel, `Bắt đầu ở số ${startVal}`);
-  setText(statusLabel, `Chạm vào số ${startVal} để bắt đầu.`);
+  setText(goalLabel, `Connect numbers from ${Math.min(...clueOrder)} to ${Math.max(...clueOrder)}`);
+  setText(statusLabel, `Tap the smallest number to start.`);
 
   nextBtn.classList.add("hidden");
   resetState();
@@ -355,7 +365,7 @@ function onDown(e) {
   const start = lv.path[0];
   const startVal = lv.cells[start].v ?? clueOrder[0];
   if (hit !== start) {
-    setText(statusLabel, `Bắt đầu ở số ${startVal} nhé!`);
+    setText(statusLabel, `Tap ${startVal} to start.`);
     flashWrong();
     wrong = true;
     renderLine(null, "bad");
@@ -374,7 +384,7 @@ function onDown(e) {
   if (startCell.show && typeof startCell.v === "number" && clueOrder[0] === startCell.v) clueNextIdx = 1;
 
   const nextClue = clueOrder[clueNextIdx];
-  setText(statusLabel, nextClue != null ? `Tiếp theo: tìm số ${nextClue}` : `Bắt đầu: ${startVal}`);
+  setText(statusLabel, nextClue != null ? `Next: ${nextClue}` : `Go!`);
   setText(progressLabel, `${visited.size}/${lv.size * lv.size}`);
   nextBtn.classList.add("hidden");
   updateVisitedClasses();
@@ -404,7 +414,7 @@ function onMove(e) {
 
   if (hit !== expectedIdx) {
     wrong = true;
-    setText(statusLabel, "Sai rồi! Thử lại nhé.");
+    setText(statusLabel, "Oops! Try again.");
     flashWrong();
     renderLine(null, "bad");
     return;
@@ -416,7 +426,7 @@ function onMove(e) {
     const expectedClue = clueOrder[clueNextIdx];
     if (expectedClue != null && cell.v !== expectedClue) {
       wrong = true;
-      setText(statusLabel, `Sai số! Cần tìm: ${expectedClue}`);
+      setText(statusLabel, `Wrong number! Need: ${expectedClue}`);
       flashWrong();
       renderLine(null, "bad");
       return;
@@ -434,14 +444,14 @@ function onMove(e) {
   setText(progressLabel, `${visited.size}/${total}`);
 
   const nextClue = clueOrder[clueNextIdx];
-  if (nextClue != null) setText(statusLabel, `Tiếp theo: tìm số ${nextClue}`);
-  else setText(statusLabel, "Đi tiếp để về đích!");
+  if (nextClue != null) setText(statusLabel, `Next: ${nextClue}`);
+  else setText(statusLabel, "Almost there!");
 
   wrong = false;
   renderLine();
 
   if (visited.size === total) {
-    setText(statusLabel, "Hoàn thành!");
+    setText(statusLabel, "Complete!");
     playSuccess();
     confetti({ particleCount: 130, spread: 70, origin: { y: 0.3 } });
     nextBtn.classList.remove("hidden");
@@ -462,7 +472,7 @@ resetBtn.addEventListener("click", () => {
   resetState();
   const lv = LEVELS[levelIndex];
   const startVal = lv.cells[lv.path[0]].v ?? clueOrder[0];
-  setText(statusLabel, `Chạm vào số ${startVal} để bắt đầu.`);
+  setText(statusLabel, `Tap ${startVal} to start.`);
 });
 
 nextBtn.addEventListener("click", () => {
@@ -472,7 +482,18 @@ nextBtn.addEventListener("click", () => {
 
 startBtn.addEventListener("click", () => {
   introOverlay.classList.add("hidden");
+  document.body.classList.remove("modal-open");
   buildLevel();
+});
+
+helpBtn?.addEventListener("click", () => {
+  introOverlay.classList.remove("hidden");
+  document.body.classList.add("modal-open");
+});
+
+closeIntroBtn?.addEventListener("click", () => {
+  introOverlay.classList.add("hidden");
+  document.body.classList.remove("modal-open");
 });
 
 boardWrap.addEventListener("mousedown", onDown);
@@ -492,5 +513,5 @@ window.addEventListener("resize", () => {
 // initial (wait for Start)
 setText(levelLabel, "Level 1/5");
 setText(goalLabel, "Hãy bắt đầu ở số nhỏ nhất");
-setText(statusLabel, "Chạm vào số nhỏ nhất để bắt đầu.");
+setText(statusLabel, "Tap the smallest number to start.");
 

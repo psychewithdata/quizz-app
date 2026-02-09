@@ -1,0 +1,70 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="800" viewBox="0 0 1200 800">
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#bfe7ff"/>
+      <stop offset="0.55" stop-color="#93cfff"/>
+      <stop offset="1" stop-color="#7bbfff"/>
+    </linearGradient>
+    <filter id="soft" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="0.6"/>
+    </filter>
+  </defs>
+
+  <rect width="1200" height="800" fill="url(#sky)"/>
+
+  <!-- big sun glow -->
+  <circle cx="600" cy="80" r="210" fill="#ffffff" opacity="0.18"/>
+  <circle cx="600" cy="80" r="140" fill="#ffffff" opacity="0.16"/>
+
+  <!-- pixel clouds (blocky) -->
+  <g filter="url(#soft)" opacity="0.95">
+    <!-- top cloud band -->
+    <g fill="#eaf2ff">
+      <rect x="0" y="210" width="80" height="20"/>
+      <rect x="60" y="190" width="140" height="20"/>
+      <rect x="120" y="170" width="180" height="20"/>
+      <rect x="240" y="190" width="180" height="20"/>
+      <rect x="380" y="210" width="220" height="20"/>
+
+      <rect x="640" y="210" width="120" height="20"/>
+      <rect x="720" y="190" width="160" height="20"/>
+      <rect x="800" y="170" width="220" height="20"/>
+      <rect x="980" y="190" width="220" height="20"/>
+      <rect x="1080" y="210" width="120" height="20"/>
+    </g>
+
+    <!-- bottom cloud sea -->
+    <g>
+      <g fill="#dbe8ff">
+        <rect x="0" y="540" width="1200" height="260"/>
+      </g>
+      <g fill="#eff6ff">
+        <rect x="0" y="520" width="160" height="24"/>
+        <rect x="120" y="500" width="240" height="24"/>
+        <rect x="260" y="520" width="260" height="24"/>
+        <rect x="460" y="500" width="240" height="24"/>
+        <rect x="640" y="520" width="280" height="24"/>
+        <rect x="860" y="500" width="240" height="24"/>
+        <rect x="1040" y="520" width="160" height="24"/>
+      </g>
+
+      <!-- outlines -->
+      <g fill="#92a8ff" opacity="0.85">
+        <rect x="0" y="544" width="80" height="6"/>
+        <rect x="80" y="538" width="60" height="6"/>
+        <rect x="140" y="532" width="70" height="6"/>
+        <rect x="210" y="526" width="90" height="6"/>
+        <rect x="300" y="532" width="120" height="6"/>
+        <rect x="420" y="538" width="120" height="6"/>
+        <rect x="540" y="544" width="140" height="6"/>
+        <rect x="680" y="538" width="80" height="6"/>
+        <rect x="760" y="532" width="120" height="6"/>
+        <rect x="880" y="526" width="110" height="6"/>
+        <rect x="990" y="532" width="90" height="6"/>
+        <rect x="1080" y="538" width="70" height="6"/>
+        <rect x="1150" y="544" width="50" height="6"/>
+      </g>
+    </g>
+  </g>
+</svg>
+
