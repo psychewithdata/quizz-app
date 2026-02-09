@@ -249,12 +249,6 @@ const LeastToGreatestGame = () => {
     return n;
   }, [level.numbers, startCell]);
 
-  const nextTargetNumber = useMemo(() => {
-    const idx = nextClueIndexRef.current;
-    if (idx < 0 || idx >= clueValues.length) return null;
-    return clueValues[idx];
-  }, [clueValues, levelIndex, won]); // re-evaluate when level changes / win resets
-
   const resizeAndCenters = useMemo(() => {
     return () => {
       const gridEl = gridRef.current;
