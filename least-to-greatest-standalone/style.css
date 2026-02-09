@@ -256,11 +256,12 @@ body{
 .pixel-titlebar{
   display:flex;
   align-items:center;
-  justify-content:space-between;
+  justify-content:flex-start;
   gap:12px;
   padding:10px 12px;
   background: linear-gradient(180deg, var(--pink-2), var(--pink-1));
   border-bottom: 3px solid rgba(0,0,0,0.06);
+  position:relative;
 }
 .pixel-dots{
   display:flex;
@@ -277,14 +278,13 @@ body{
   letter-spacing:0.2px;
   color:#b4236a;
   text-transform:lowercase;
-}
-.pixel-close{
-  width:36px;height:28px;
-  border-radius:10px;
-  border:2px solid rgba(15,23,42,0.25);
-  background: rgba(255,255,255,0.72);
-  font-weight:1000;
-  cursor:pointer;
+  position:absolute;
+  left:50%;
+  transform:translateX(-50%);
+  max-width:70%;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  white-space:nowrap;
 }
 .pixel-body{
   padding:14px 14px 16px;
@@ -343,6 +343,14 @@ body{
   background: linear-gradient(180deg, var(--pink-3), var(--pink-1));
   border: 2px solid rgba(255,255,255,0.25);
   box-shadow: 0 8px 16px rgba(0,0,0,0.18);
+}
+
+.end-actions{
+  margin-top:10px;
+  display:flex;
+  align-items:center;
+  justify-content:flex-end;
+  gap:10px;
 }
 
 /* Hide underlying UI when intro modal open */

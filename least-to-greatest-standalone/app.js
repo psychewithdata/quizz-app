@@ -13,7 +13,9 @@ const $ = (id) => document.getElementById(id);
 
 const introOverlay = $("introOverlay");
 const startBtn = $("startBtn");
-const closeIntroBtn = $("closeIntroBtn");
+const endOverlay = $("endOverlay");
+const replayBtn = $("replayBtn");
+const viewGameBtn = $("viewGameBtn");
 const levelLabel = $("levelLabel");
 const goalLabel = $("goalLabel");
 const statusLabel = $("statusLabel");
@@ -219,6 +221,7 @@ function buildLevel() {
   setText(statusLabel, `Tap the smallest number to start.`);
 
   nextBtn.classList.add("hidden");
+  closeEnd();
   resetState();
 
   requestAnimationFrame(() => {
@@ -238,6 +241,14 @@ function closeIntro({ shouldBuild } = { shouldBuild: false }) {
 function openIntro() {
   introOverlay.classList.remove("hidden");
   document.body.classList.add("modal-open");
+}
+
+function openEnd() {
+  endOverlay?.classList.remove("hidden");
+}
+
+function closeEnd() {
+  endOverlay?.classList.add("hidden");
 }
 
 function resetState() {
@@ -327,7 +338,7 @@ function animateSnapBack() {
       resetState();
       const lv = LEVELS[levelIndex];
       const startVal = lv.cells[lv.path[0]].v ?? clueOrder[0];
-      setText(statusLabel, `Chạm vào số ${startVal} để bắt đầu.`);
+      setText(statusLabel, `Tap ${startVal} to start.`);
       return;
     }
     requestAnimationFrame(tick);
@@ -469,7 +480,12 @@ function onMove(e) {
     setText(statusLabel, "Complete!");
     playSuccess();
     confetti({ particleCount: 130, spread: 70, origin: { y: 0.3 } });
-    nextBtn.classList.remove("hidden");
+    if (levelIndex >= LEVELS.length - 1) {
+      nextBtn.classList.add("hidden");
+      openEnd();
+    } else {
+      nextBtn.classList.remove("hidden");
+    }
   }
 }
 
@@ -503,8 +519,14 @@ helpBtn?.addEventListener("click", () => {
   openIntro();
 });
 
-closeIntroBtn?.addEventListener("click", () => {
-  closeIntro({ shouldBuild: true });
+viewGameBtn?.addEventListener("click", () => {
+  closeEnd();
+});
+
+replayBtn?.addEventListener("click", () => {
+  closeEnd();
+  levelIndex = 0;
+  buildLevel();
 });
 
 boardWrap.addEventListener("mousedown", onDown);
@@ -523,6 +545,6 @@ window.addEventListener("resize", () => {
 
 // initial (wait for Start)
 setText(levelLabel, "Level 1/5");
-setText(goalLabel, "Hãy bắt đầu ở số nhỏ nhất");
+setText(goalLabel, "Connect numbers from least to greatest");
 setText(statusLabel, "Tap the smallest number to start.");
 
