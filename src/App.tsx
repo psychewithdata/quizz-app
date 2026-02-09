@@ -9,6 +9,8 @@ import Auth from "./pages/Auth";
 import Dashboard from "./pages/Dashboard";
 import ExamList from "./pages/ExamList";
 import QuizTake from "./pages/QuizTake";
+import Practice from "./pages/Practice";
+import LeastToGreatestGame from "./pages/LeastToGreatestGame";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -26,6 +28,8 @@ const App = () => (
             <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/exams" element={<ExamList />} />
             <Route path="/quiz/:examId" element={<QuizTake />} />
+            <Route path="/practice" element={<Practice />} />
+            <Route path="/practice/least-to-greatest" element={<LeastToGreatestGame />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>
