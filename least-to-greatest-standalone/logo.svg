@@ -1,0 +1,28 @@
+<svg width="128" height="128" viewBox="0 0 128 128" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="10" y1="10" x2="118" y2="118" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#FFD1E8"/>
+      <stop offset="0.5" stop-color="#FFF0A6"/>
+      <stop offset="1" stop-color="#BDE8FF"/>
+    </linearGradient>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="6" stdDeviation="6" flood-color="#000000" flood-opacity="0.18"/>
+    </filter>
+  </defs>
+
+  <rect x="10" y="10" width="108" height="108" rx="26" fill="url(#bg)" filter="url(#shadow)"/>
+  <path d="M40 78C55 64 68 62 88 48" stroke="#1E40AF" stroke-width="8" stroke-linecap="round"/>
+  <path d="M86 38L96 46L84 54" fill="none" stroke="#1E40AF" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <circle cx="38" cy="82" r="16" fill="#FFFFFF" stroke="#0F172A" stroke-width="6"/>
+  <circle cx="64" cy="64" r="16" fill="#FFFFFF" stroke="#0F172A" stroke-width="6"/>
+  <circle cx="92" cy="44" r="16" fill="#FFFFFF" stroke="#0F172A" stroke-width="6"/>
+
+  <text x="38" y="88" text-anchor="middle" font-family="Inter, system-ui, Arial" font-size="20" font-weight="900" fill="#0F172A">1</text>
+  <text x="64" y="70" text-anchor="middle" font-family="Inter, system-ui, Arial" font-size="20" font-weight="900" fill="#0F172A">2</text>
+  <text x="92" y="50" text-anchor="middle" font-family="Inter, system-ui, Arial" font-size="20" font-weight="900" fill="#0F172A">3</text>
+
+  <path d="M26 36L30 44L39 45L32 51L34 60L26 55L18 60L20 51L13 45L22 44L26 36Z" fill="#FF7A00" opacity="0.92"/>
+  <path d="M104 84L107 90L114 91L109 95L110 102L104 99L98 102L99 95L94 91L101 90L104 84Z" fill="#7C3AED" opacity="0.9"/>
+</svg>
+

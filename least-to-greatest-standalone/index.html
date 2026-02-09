@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Complete the least to the greatest</title>
+    <link rel="stylesheet" href="./style.css" />
+
+    <script type="importmap">
+      {
+        "imports": {
+          "canvas-confetti": "https://esm.sh/canvas-confetti@1.6.0"
+        }
+      }
+    </script>
+  </head>
+  <body>
+    <div class="app" id="app">
+      <div class="intro-overlay" id="introOverlay" role="dialog" aria-modal="true">
+        <div class="intro-card">
+          <div class="intro-head">
+            <div>
+              <div class="intro-title">Complete the least to the greatest</div>
+              <div class="intro-subtitle">Nối đường đi và ghé các số theo thứ tự</div>
+            </div>
+            <img class="logo" src="./logo.svg" alt="Logo" draggable="false" />
+          </div>
+          <ul class="intro-rules">
+            <li>Bắt đầu ở số nhỏ nhất trên bảng.</li>
+            <li>Kéo để đi lên / xuống / trái / phải.</li>
+            <li>Mỗi ô chỉ được ghé đúng 1 lần.</li>
+            <li>Các ô có số phải đi theo thứ tự từ nhỏ → lớn.</li>
+            <li>Hoàn thành khi đi hết tất cả ô.</li>
+          </ul>
+          <div class="intro-footer">Dùng chuột hoặc chạm tay để vẽ “con rắn” nhé.</div>
+          <button class="btn primary" id="startBtn" type="button">Bắt đầu chơi</button>
+        </div>
+      </div>
+
+      <div class="topbar">
+        <div class="left">
+          <div class="title" id="levelLabel">Level 1/5</div>
+          <div class="subtitle" id="goalLabel">Hãy bắt đầu ở số nhỏ nhất</div>
+        </div>
+        <div class="right">
+          <img class="logo small" src="./logo.svg" alt="Logo" draggable="false" />
+        </div>
+      </div>
+
+      <div class="status" id="statusLabel">Chạm vào số nhỏ nhất để bắt đầu.</div>
+
+      <div class="board-wrap" id="boardWrap">
+        <div class="grid" id="grid"></div>
+        <canvas class="overlay" id="overlay"></canvas>
+      </div>
+
+      <div class="controls">
+        <button class="btn" id="resetBtn" type="button">Làm lại</button>
+        <div class="progress" id="progressLabel">0/0</div>
+        <button class="btn primary hidden" id="nextBtn" type="button">Level tiếp theo</button>
+      </div>
+    </div>
+
+    <script type="module" src="./app.js"></script>
+  </body>
+</html>
+
